@@ -1,51 +1,54 @@
 const baseUrl = 'https://ghibliapi.herokuapp.com/films/';
 
-function getGhibi() {
+function getGhibli() {
     fetch(baseUrl)
-        .then(ghibiInfo => ghibiInfo.json())
-        .then(ghibiInfoJsonified => displayGhibiInfo(ghibiInfoJsonified));
+        .then(ghibliInfo => ghibliInfo.json())
+        .then(ghibliInfoJsonified => displayGhibliInfo(ghibliInfoJsonified));
 }
 
-function displayGhibiInfo(ghibiInfo) {
-    let heading = document.querySelector('h1');
+function displayGhibliInfo(ghibliInfo) {
+    let heading = document.getElementById('title');
     heading.className = 'title';
-    heading.innerText = 'Ghibi Topic';
+    heading.innerText = 'Ghibli Movies';
 
-    // create new element (div with  specific card container class)
+    // create new element (div with specific card container class)
     // append a style to this div
-    // append the text (maybe p tag with the data to be displayed or ul, you decide
+    // append the text (maybe p tag with the data to be displayed or ul
     //repeat for each object in the array
 
+    // MAIN SECTION FOR MOVIE DISPLAY
     let mainDivContainer = document.querySelector('div');
     mainDivContainer.className = 'container';
 
-    for (let i = 0; i < ghibiInfo.length; i++) {   
+    // LOOP THROUGH MOVIE DATA
+    for (let i = 0; i < ghibliInfo.length; i++) {   
         let card = document.createElement('div');
         card.className = 'card';
-        card.style = 'width: 18rem; margin: 1em; height: 300px; padding: 4px';
 
+        // CARD BODY
         let cardBody = document.createElement('div');
         cardBody.className = 'card-body';
 
+        // CARD HEADER
+        let header4 = document.createElement('h4');
+        header4.className = 'card-title';
 
-        let header5 = document.createElement('h5');
-        header5.className = 'card-title';
-        header5.style = 'font-family: lobster, cursive; color: purple';
         // film title goes here
-        header5.innerText = ghibiInfo[i].title;
+        header4.innerText = ghibliInfo[i].title;
 
         let filmDirectorYear = document.createElement('h6');
-        filmDirectorYear.className = 'class-subtitle mb-2 text-muted';
+        filmDirectorYear.className = 'class-subtitle mb-2 text-muted filmDirYear';
         //film director and year goes here
-        filmDirectorYear.innerText = "Directed by " + ghibiInfo[i].director + " in " + ghibiInfo[i].release_date;
+        filmDirectorYear.innerText = "Directed by " + ghibliInfo[i].director + " in " + ghibliInfo[i].release_date;
+        filmDirectorYear.style = '';
 
         let filmDescription = document.createElement('p');
         filmDescription.className = 'card-text';
         //film description goes here
-        filmDescription.innerText = ghibiInfo[i].description;
+        filmDescription.innerText = ghibliInfo[i].description;
 
         // appending children
-        cardBody.appendChild(header5);
+        cardBody.appendChild(header4);
         cardBody.appendChild(filmDirectorYear);
         cardBody.appendChild(filmDescription);
         card.appendChild(cardBody);
@@ -54,9 +57,9 @@ function displayGhibiInfo(ghibiInfo) {
     }
 
     // for(eachValueObj of ghibiInfo){
-    //     console.log(eachValueObj); 
+        console.log(mainDivContainer); 
     // }
 
 }
 
-getGhibi();
+getGhibli();
